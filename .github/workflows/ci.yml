@@ -22,12 +22,14 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install dependencies directly
+      - name: Install Dependencies Directly
         run: |
           python -m pip install --upgrade pip setuptools wheel
           python -m pip install click rich regex jsonschema pydantic pytest
           python -m pip install -e . --no-deps
 
-      - name: Run Tests
+      - name: Run Pytest
+        env:
+          PYTHONPATH: .
         run: |
           python -m pytest tests/ -v
