@@ -23,11 +23,13 @@ jobs:
         python-version: ${{ matrix.python-version }}
         cache: 'pip'
 
-    - name: Install Build Tools and Dependencies
+    - name: Install dependencies
       run: |
         python -m pip install --upgrade pip setuptools wheel
         pip install -e .[dev]
 
-    - name: Run Pytest
-  run: |
-    python -m pytest tests/ -v
+    - name: Run Tests
+      env:
+        PYTHONPATH: .
+      run: |
+        python -m pytest tests/ -v
